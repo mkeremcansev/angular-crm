@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {LoginFormService} from "../service/login-form.service";
 import {FormControl, FormGroup} from "@angular/forms";
 import {Router} from "@angular/router";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-login-form',
@@ -16,7 +17,8 @@ export class LoginFormComponent {
 
   constructor(
     private loginFormService: LoginFormService,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService
   ) {
   }
 
@@ -24,8 +26,10 @@ export class LoginFormComponent {
     if (this.formGroup.valid) {
       this.loginFormService.login(this.formGroup.value).subscribe((response) => {
         localStorage.setItem('token', response.prefix + ' ' + response.token);
-        this.router.navigate(['/']);
-        console.log(response);
+        this.toastr.success('Login successfully.')
+        setTimeout(() => {
+          this.router.navigate(['/']);
+        }, 3000)
       })
     } else {
       console.log('hata')

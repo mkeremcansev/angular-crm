@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {HttpClient, HttpHeaders, HttpResponse} from "@angular/common/http";
+import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,7 @@ export class LoginFormService {
     return this.httpClient.post<Partial<{ token: string; prefix: string; }>>('http://angular-backend.test/api/login', data);
   }
 
-  user() {
-    return this.httpClient.get('http://angular-backend.test/api/user')
+  user(): Observable<HttpResponse<any>> {
+    return this.httpClient.get<any>('http://angular-backend.test/api/user', { observe: 'response' })
   }
 }

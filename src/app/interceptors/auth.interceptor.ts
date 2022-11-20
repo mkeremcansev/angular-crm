@@ -17,6 +17,7 @@ export class AuthInterceptor implements HttpInterceptor {
     return next.handle(request.clone({
       setHeaders: {
         'Content-Type': 'application/json',
+        'Accept': 'application/json',
         'Authorization': `${localStorage.getItem('token')}`
       }
     }));

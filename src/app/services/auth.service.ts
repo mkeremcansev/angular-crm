@@ -1,11 +1,13 @@
 import {Injectable} from '@angular/core';
 import {Router} from "@angular/router";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpResponse} from "@angular/common/http";
+import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  authStatus = false;
 
   constructor(
     private router: Router,
@@ -14,22 +16,22 @@ export class AuthService {
   }
 
   isLoggedIn(): boolean {
-    let status = false;
-    this.httpClient.get('http://angular-backend.test/api/user', {
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `${localStorage.getItem('token')}`
+    let status = true;
+    this.authControl().subscribe((response) => {
+      if (response.status === 401) {
+        status = false;
       }
-    }).subscribe((r) => {
-
     });
-    console.log(status)
-    if (!status) {
+    if (status) {
       return true;
     } else {
-      localStorage.removeItem('token');
+      localStorage.removeItem('token')
       this.router.navigate(['/login']);
       return false;
     }
+  }
+
+  authControl(): Observable<HttpResponse<any>> {
+    return this.httpClient.get<any>('http://angular-backend.test/api/user', {observe: 'response'});
   }
 }
