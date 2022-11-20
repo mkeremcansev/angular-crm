@@ -1,0 +1,17 @@
+<div class="todo-form-wrapper">
+
+  <div class="todo-form">
+    <h1 class="todo-form-title">Todo Form</h1>
+    <form [formGroup]="formGroup">
+    <mat-form-field appearance="fill">
+      <mat-label>Title</mat-label>
+      <input matInput formControlName="title">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Content</mat-label>
+      <textarea matInput formControlName="content"></textarea>
+    </mat-form-field>
+    <button mat-raised-button color="primary" [disabled]="formGroup.invalid" type="button" class="button" (click)="store()">Save</button>
+    </form>
+  </div>
+</div>

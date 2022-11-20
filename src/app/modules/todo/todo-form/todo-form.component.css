@@ -1,0 +1,20 @@
+.todo-form-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.todo-form-title {
+  text-align: center;
+}
+
+.todo-form form {
+  display: flex;
+  flex-direction: column;
+}
+
+.todo-form {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
