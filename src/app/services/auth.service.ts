@@ -12,8 +12,7 @@ export class AuthService {
   constructor(
     private router: Router,
     private httpClient: HttpClient
-  ) {
-  }
+  ) { }
 
   isLoggedIn(): boolean {
     let status = true;
@@ -25,7 +24,7 @@ export class AuthService {
     if (status) {
       return true;
     } else {
-      localStorage.removeItem('token')
+      localStorage.removeItem('token');
       this.router.navigate(['/login']);
       return false;
     }

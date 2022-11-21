@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {StoreRequestModel} from '../model/store'
+import {StoreModel, StoreRequestModel} from '../model/store'
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class TodoFormService {
   ) {
   }
 
-  store(formData: StoreRequestModel) {
-    return this.httpClient.post('http://angular-backend.test/api/todo/store', formData);
+  store(formData: StoreRequestModel): Observable<StoreModel> {
+    return this.httpClient.post<StoreModel>('http://angular-backend.test/api/todo/store', formData);
   }
 }
